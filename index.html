@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科科机器人科技团队 | 探索智能未来</title>
+    <meta name="description" content="科科机器人科技团队，专注于机器人研发与智能自动化解决方案，致力于将前沿AI技术与机器人工程深度融合。">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ==================== 导航栏 ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo" data-page="home">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">科科机器人</span>
+            </a>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="#" class="nav-link active" data-page="home">首页</a></li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="about">关于我们</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-page="about">公司介绍</a></li>
+                        <li><a href="#" data-page="team">核心团队</a></li>
+                        <li><a href="#" data-page="news">新闻动态</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="products">产品服务</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-page="products" data-anchor="product-edubot">教育机器人</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-armpro">工业机器人</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-servemini">服务机器人</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-custom">定制方案</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-link" data-page="contact">联系我们</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== 页面容器 ==================== -->
+    <main id="pageContainer">
+
+        <!-- ========== 首页 ========== -->
+        <section class="page active" id="page-home">
+            <!-- 轮播图 -->
+            <div class="carousel" id="heroCarousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- 第1张 -->
+                    <div class="carousel-slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1a2744 70%, #0f172a 100%);">
+                            <div class="slide-pattern"></div>
+                        </div>
+                        <div class="container slide-content">
+                            <div class="slide-text">
+                                <p class="slide-tag">Keke Robot · 2026</p>
+                                <h1 class="slide-title">用智能科技<br><span class="slide-highlight">重塑未来世界</span></h1>
+                                <p class="slide-desc">科科机器人科技团队，专注机器人研发与智能自动化，让AI走进千行百业</p>
+                                <div class="slide-actions">
+                                    <button class="btn btn-primary" data-page="products">探索产品 →</button>
+                                    <button class="btn btn-outline" data-page="contact">联系我们</button>
+                                </div>
+                            </div>
+                            <div class="slide-visual">
+                                <div class="slide-orb-lg"></div>
+                                <div class="slide-orb-sm"></div>
+                                <div class="slide-grid"></div>
+                                <div class="slide-robot">🤖</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 第2张 -->
+                    <div class="carousel-slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #0c1929 0%, #0f3b5c 35%, #1a3a2a 70%, #0c1929 100%);">
+                            <div class="slide-pattern"></div>
+                        </div>
+                        <div class="container slide-content">
+                            <div class="slide-text">
+                                <p class="slide-tag">New Product Launch</p>
+                                <h1 class="slide-title">KeKe Arm Pro X3<br><span class="slide-highlight">六轴协作机械臂</span></h1>
+                                <p class="slide-desc">±0.02mm 重复定位精度 · 5kg 负载 · 拖拽示教，重新定义工业自动化</p>
+                                <div class="slide-actions">
+                                    <button class="btn btn-primary" data-page="products">了解详情 →</button>
+                                    <button class="btn btn-outline" data-page="contact">预约演示</button>
+                                </div>
+                            </div>
+                            <div class="slide-visual">
+                                <div class="slide-orb-lg" style="background: radial-gradient(circle at 40% 40%, rgba(16,185,129,0.3), rgba(6,182,212,0.1), transparent);"></div>
+                                <div class="slide-orb-sm"></div>
+                                <div class="slide-grid"></div>
+                                <div class="slide-robot">🦾</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 第3张 -->
+                    <div class="carousel-slide">
+                        <div class="slide-bg" style="background: linear-gradient(135deg, #0f172a 0%, #2d1b4e 40%, #1e2a4a 70%, #0f172a 100%);">
+                            <div class="slide-pattern"></div>
+                        </div>
+                        <div class="container slide-content">
+                            <div class="slide-text">
+                                <p class="slide-tag">Education · Future</p>
+                                <h1 class="slide-title">KeKe EduBot S1<br><span class="slide-highlight">孩子的第一台机器人</span></h1>
+                                <p class="slide-desc">图形化 + Python 双编程模式，6自由度扩展，让每个孩子创造属于自己的机器人</p>
+                                <div class="slide-actions">
+                                    <button class="btn btn-primary" data-page="products">了解更多 →</button>
+                                    <button class="btn btn-outline" data-page="contact">合作咨询</button>
+                                </div>
+                            </div>
+                            <div class="slide-visual">
+                                <div class="slide-orb-lg" style="background: radial-gradient(circle at 40% 40%, rgba(168,85,247,0.3), rgba(59,130,246,0.1), transparent);"></div>
+                                <div class="slide-orb-sm"></div>
+                                <div class="slide-grid"></div>
+                                <div class="slide-robot">🎓</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 轮播指示器 -->
+                <div class="carousel-dots" id="carouselDots">
+                    <button class="carousel-dot active" data-index="0"></button>
+                    <button class="carousel-dot" data-index="1"></button>
+                    <button class="carousel-dot" data-index="2"></button>
+                </div>
+                <!-- 轮播箭头 -->
+                <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="上一张">‹</button>
+                <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="下一张">›</button>
+            </div>
+
+            <!-- 技术愿景标语 -->
+            <div class="home-vision">
+                <div class="container">
+                    <p class="vision-headline">让每一台机器人都拥有思考的能力</p>
+                    <p class="vision-sub">自研运动控制 · AI视觉 · 大模型交互 —— 三大核心技术，驱动智能进化</p>
+                </div>
+            </div>
+
+            <!-- 业务领域 -->
+            <div class="home-fields">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-label">Our Fields</span>
+                        <h2 class="section-title">深耕三大领域</h2>
+                        <p class="section-subtitle">教育启迪心智 · 工业赋能制造 · 服务温暖生活</p>
+                    </div>
+                    <div class="fields-grid">
+                        <div class="field-card">
+                            <div class="field-icon-wrap"><span>🎓</span></div>
+                            <h3>教育机器人</h3>
+                            <p>面向K12与高校的编程教育平台，提供从入门到竞赛的全体系课程与硬件支持。</p>
+                            <ul class="field-list">
+                                <li>图形化 + Python 双编程模式</li>
+                                <li>配套200+课时标准化课程</li>
+                                <li>支持全国青少年机器人竞赛</li>
+                            </ul>
+                            <button class="btn btn-text" data-page="products">查看产品 →</button>
+                        </div>
+                        <div class="field-card">
+                            <div class="field-icon-wrap"><span>🏭</span></div>
+                            <h3>工业机器人</h3>
+                            <p>高精度协作机械臂与智能产线解决方案，助力制造业转型升级，降本增效。</p>
+                            <ul class="field-list">
+                                <li>±0.02mm 重复定位精度</li>
+                                <li>力控/阻抗/柔顺多控制模式</li>
+                                <li>即插即用，1天完成部署</li>
+                            </ul>
+                            <button class="btn btn-text" data-page="products">查看产品 →</button>
+                        </div>
+                        <div class="field-card">
+                            <div class="field-icon-wrap"><span>🤖</span></div>
+                            <h3>服务机器人</h3>
+                            <p>智能商用服务机器人，覆盖酒店、医院、展厅、零售等多场景，提升服务效率。</p>
+                            <ul class="field-list">
+                                <li>SLAM自主导航，智能避障</li>
+                                <li>大模型驱动自然语言交互</li>
+                                <li>7×24h 不间断运行</li>
+                            </ul>
+                            <button class="btn btn-text" data-page="products">查看产品 →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="home-cta">
+                <div class="container">
+                    <div class="cta-card">
+                        <h2>准备好开启智能之旅了吗？</h2>
+                        <p>无论您是教育机构、制造企业还是商业伙伴，我们都期待与您携手共创</p>
+                        <div class="cta-actions">
+                            <button class="btn btn-white" data-page="contact">立即咨询</button>
+                            <button class="btn btn-outline-light" data-page="products">浏览产品</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 关于我们 ========== -->
+        <section class="page" id="page-about">
+            <div class="page-hero">
+                <div class="container">
+                    <span class="page-hero-label">About Us</span>
+                    <h1 class="page-hero-title">关于科科机器人</h1>
+                    <p class="page-hero-desc">一群怀揣科技梦想的年轻人，用代码与机械谱写智能新篇章</p>
+                </div>
+            </div>
+
+            <div class="about-intro">
+                <div class="container">
+                    <div class="about-intro-grid">
+                        <div class="about-intro-text">
+                            <h2>我们是谁</h2>
+                            <p>科科机器人科技团队成立于2021年，总部位于深圳，是一家专注于智能机器人研发与自动化解决方案的高科技企业。团队汇聚了来自清华大学、浙江大学、哈工大等高校，以及大疆、百度、华为等科技企业的优秀人才。</p>
+                            <p>我们坚持"技术驱动、产品为王"的理念，在运动控制、AI视觉、自然语言交互等核心技术上持续深耕，已累计获得23项发明专利与软件著作权。</p>
+                            <p>目前，我们的产品已服务超过36家企业与机构，涵盖教育、工业制造、商业服务等多个领域。</p>
+                        </div>
+                        <div class="about-intro-visual">
+                            <div class="about-visual-box">
+                                <div class="about-visual-icon">◈</div>
+                                <span>科科机器人科技团队</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-timeline">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-label">Milestones</span>
+                        <h2 class="section-title">发展历程</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">2021</div>
+                            <div class="timeline-card">
+                                <h3>团队创立</h3>
+                                <p>3位创始人在深圳南山区创立科科机器人，获得天使轮融资500万元。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">2022</div>
+                            <div class="timeline-card">
+                                <h3>首款产品发布</h3>
+                                <p>推出 KeKe EduBot S1 教育机器人，首年销量突破2000台，覆盖全国50+所学校。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-card">
+                                <h3>工业线布局</h3>
+                                <p>完成A轮融资3000万元，发布 KeKe Arm Pro X3 协作机械臂，进入工业自动化领域。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-card">
+                                <h3>服务机器人上市</h3>
+                                <p>KeKe Serve Mini 商用服务机器人量产，累计部署超过500台。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-card">
+                                <h3>技术突破</h3>
+                                <p>自研AI视觉算法准确率达99.2%，获国家高新技术企业认定，团队扩展至68人。</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot timeline-dot-future"></div>
+                            <div class="timeline-year">2026</div>
+                            <div class="timeline-card timeline-card-future">
+                                <h3>迈向新征程</h3>
+                                <p>启动B轮融资，加速全球化布局，新一代人形机器人研发中……</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-culture">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-label">Culture</span>
+                        <h2 class="section-title">企业文化</h2>
+                    </div>
+                    <div class="culture-grid">
+                        <div class="culture-card">
+                            <span class="culture-icon">🚀</span>
+                            <h3>创新驱动</h3>
+                            <p>鼓励大胆探索与试错，用技术创新解决实际问题</p>
+                        </div>
+                        <div class="culture-card">
+                            <span class="culture-icon">🎯</span>
+                            <h3>精益求精</h3>
+                            <p>对每一行代码、每一个零件负责，追求极致的产品体验</p>
+                        </div>
+                        <div class="culture-card">
+                            <span class="culture-icon">🤝</span>
+                            <h3>开放协作</h3>
+                            <p>扁平化管理，跨学科碰撞，让每个人的才华尽情绽放</p>
+                        </div>
+                        <div class="culture-card">
+                            <span class="culture-icon">💖</span>
+                            <h3>客户至上</h3>
+                            <p>深入了解客户真实需求，提供超越期待的产品与服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 产品服务 ========== -->
+        <section class="page" id="page-products">
+            <div class="page-hero">
+                <div class="container">
+                    <span class="page-hero-label">Products & Services</span>
+                    <h1 class="page-hero-title">产品与服务</h1>
+                    <p class="page-hero-desc">覆盖教育、工业、服务三大领域，提供全栈式机器人解决方案</p>
+                </div>
+            </div>
+
+            <div class="products-detail">
+                <div class="container">
+                    <div class="product-block" id="product-edubot">
+                        <div class="product-block-img">
+                            <div class="product-block-placeholder">🎓</div>
+                            <span class="product-badge">教育系列</span>
+                        </div>
+                        <div class="product-block-info">
+                            <h2>KeKe EduBot S1</h2>
+                            <p class="product-block-tagline">专为青少年编程教育打造，让每个孩子都能创造属于自己的机器人</p>
+                            <p>EduBot S1 是我们面向K12及高校编程教育推出的旗舰产品。支持 Scratch 图形化编程与 Python 代码编程双模式自由切换，配套200+课时的标准化课程体系。6自由度机械臂扩展模块让学习从虚拟走向现实，内置视觉识别模块支持颜色追踪、标签识别等趣味实验。</p>
+                            <div class="product-specs">
+                                <div class="spec-item"><strong>编程模式</strong><span>Scratch 3.0 / Python</span></div>
+                                <div class="spec-item"><strong>扩展接口</strong><span>6自由度机械臂 / 传感器套件</span></div>
+                                <div class="spec-item"><strong>视觉模块</strong><span>颜色追踪 / 二维码识别</span></div>
+                                <div class="spec-item"><strong>续航时间</strong><span>4-6小时</span></div>
+                                <div class="spec-item"><strong>适用年龄</strong><span>8岁以上</span></div>
+                                <div class="spec-item"><strong>配套课程</strong><span>200+课时</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-block product-block-reverse" id="product-armpro">
+                        <div class="product-block-img">
+                            <div class="product-block-placeholder">🏭</div>
+                            <span class="product-badge">工业系列</span>
+                        </div>
+                        <div class="product-block-info">
+                            <h2>KeKe Arm Pro X3</h2>
+                            <p class="product-block-tagline">高精度六轴协作机械臂，重新定义工业自动化</p>
+                            <p>Arm Pro X3 是一款面向精密制造的高性能协作机械臂，采用自研高扭矩无框电机与谐波减速器，重复定位精度达 ±0.02mm。支持力控、阻抗控制、柔顺控制等多种模式，拖拽示教功能让产线部署从未如此简单。</p>
+                            <div class="product-specs">
+                                <div class="spec-item"><strong>自由度</strong><span>6轴协作</span></div>
+                                <div class="spec-item"><strong>重复精度</strong><span>±0.02mm</span></div>
+                                <div class="spec-item"><strong>负载能力</strong><span>5kg</span></div>
+                                <div class="spec-item"><strong>工作半径</strong><span>850mm</span></div>
+                                <div class="spec-item"><strong>控制模式</strong><span>力控/阻抗/柔顺</span></div>
+                                <div class="spec-item"><strong>部署方式</strong><span>拖拽示教 · 即插即用</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-block" id="product-servemini">
+                        <div class="product-block-img">
+                            <div class="product-block-placeholder">🤖</div>
+                            <span class="product-badge">服务系列</span>
+                        </div>
+                        <div class="product-block-info">
+                            <h2>KeKe Serve Mini</h2>
+                            <p class="product-block-tagline">智能商用服务机器人，7×24小时不间断运行的可靠伙伴</p>
+                            <p>Serve Mini 专为酒店、医院、展厅、零售等商用场景设计。搭载自研SLAM导航系统，激光+视觉融合感知，可在复杂动态环境中自主避障导航。基于大语言模型的多轮对话引擎，让机器人真正理解并回应用户的自然语言指令。</p>
+                            <div class="product-specs">
+                                <div class="spec-item"><strong>导航方式</strong><span>激光SLAM + 视觉融合</span></div>
+                                <div class="spec-item"><strong>交互方式</strong><span>语音 + 触屏 + 手机</span></div>
+                                <div class="spec-item"><strong>续航时间</strong><span>8-12小时</span></div>
+                                <div class="spec-item"><strong>充电方式</strong><span>自动回充</span></div>
+                                <div class="spec-item"><strong>多机协作</strong><span>支持10+台协同</span></div>
+                                <div class="spec-item"><strong>适用场景</strong><span>酒店/医院/展厅/零售</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="custom-service" id="product-custom">
+                <div class="container">
+                    <div class="custom-card">
+                        <h2>🔧 定制化解决方案</h2>
+                        <p>除了标准产品，我们还提供根据客户需求量身定制的机器人解决方案，涵盖硬件设计、软件开发、系统集成到运维支持的全流程服务。</p>
+                        <button class="btn btn-primary" data-page="contact" data-anchor="contactFormAnchor">咨询定制服务 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 新闻动态 ========== -->
+        <section class="page" id="page-news">
+            <div class="page-hero">
+                <div class="container">
+                    <span class="page-hero-label">News</span>
+                    <h1 class="page-hero-title">新闻动态</h1>
+                    <p class="page-hero-desc">了解科科机器人的最新进展与行业洞察</p>
+                </div>
+            </div>
+            <div class="news-content">
+                <div class="container">
+                    <div class="news-grid" id="newsGrid">
+                        <!-- 新闻由 JS 动态渲染，编辑 newsData 数组即可 -->
+                    </div>
+                    <div class="news-more" id="newsMore">
+                        <button class="btn btn-outline-dark" id="loadMoreNews">加载更多新闻</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== 新闻详情页 ========== -->
+        <section class="page" id="page-news-detail">
+            <div class="container" style="max-width:900px;">
+                <div class="news-detail-content" id="newsDetailContent">
+                    <!-- 由 JS 动态填充 -->
+                </div>
+                <div class="news-detail-back">
+                    <button class="btn btn-outline-dark" data-page="news">← 返回新闻列表</button>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="page" id="page-team-detail">
+            <div class="container" style="max-width:900px;">
+                <div class="team-detail-content" id="teamDetailContent">
+                    <!- - 由 JS 动态填充 - ->
+                </div>
+                <div class="team-detail-back">
+                    <button class="btn btn-outline-dark" data-page="team">← 返回团队列表</button>
+                </div>
+            </div>
+        </section>
+        
+
+        
+        <section class="page" id="page-team">
+            <div class="page-hero">
+                <div class="container">
+                    <span class="page-hero-label">Our Team</span>
+                    <h1 class="page-hero-title">核心团队</h1>
+                    <p class="page-hero-desc">来自高校与科技企业的多学科交叉团队，因为热爱而汇聚</p>
+                </div>
+            </div>
+            <div class="team-content">
+                <div class="container">
+                    <div class="team-grid" id="teamGrid">
+                        <!- - 由 JS 根据 team/team-data.js 动态渲染 - ->
+                    </div>
+
+                    <div class="join-us">
+                        <div class="join-card">
+                            <h2>🚀 加入我们</h2>
+                            <p>我们正在寻找热爱机器人技术的你——无论算法大牛、硬件极客还是产品达人，这里都有你的舞台。</p>
+                            <button class="btn btn-primary" data-page="contact">投递简历 →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- ========== 联系我们 ========== -->
+        <section class="page" id="page-contact">
+            <div class="page-hero">
+                <div class="container">
+                    <span class="page-hero-label">Contact Us</span>
+                    <h1 class="page-hero-title">联系我们</h1>
+                    <p class="page-hero-desc">期待与您携手，探索智能机器人的无限可能</p>
+                </div>
+            </div>
+            <div class="contact-content">
+                <div class="container">
+                    <div class="contact-grid-layout">
+                        <div class="contact-info-col">
+                            <div class="contact-card-info">
+                                <span class="contact-info-icon">📍</span>
+                                <div><h3>团队地址</h3>
+                                <p>湖北省武汉市青山区和平大道947号<br>武汉科技大学</p></div>
+                            </div>
+                            <div class="contact-card-info">
+                                <span class="contact-info-icon">📧</span>
+                                <div><h3>电子邮箱</h3>
+                                <p>1492576943@qq.com</p></div>
+                            </div>
+                            <div class="contact-card-info">
+                                <span class="contact-info-icon">📞</span>
+                                <div><h3>联系电话</h3>
+                                <p>+86 15336531083</p></div>
+                            </div>
+                            <div class="contact-card-info">
+                                <span class="contact-info-icon">🕐</span>
+                                <div><h3>工作时间</h3>
+                                <p>周一至周五 09:00 - 18:00<br>周六 10:00 - 16:00（仅技术支持）</p></div>
+                            </div>
+                        </div>
+                        <form class="contact-form-panel" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                            <!-- 咨询定制服务按钮会跳转到此 -->
+                            <span id="contactFormAnchor" style="display:block;height:1px;position:relative;top:-90px;"></span>
+                            <!-- ⚠ 请替换为你的 Web3Forms Access Key：https://web3forms.com/#start -->
+                            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                            <input type="hidden" name="from_name" value="科科机器人官网咨询">
+                            <input type="hidden" name="subject" value="新的客户咨询">
+                            <!-- 防止垃圾邮件 -->
+                            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+                            <h3>发送消息</h3>
+                            <p class="form-subtitle">请填写以下表单，我们将在24小时内与您联系</p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">姓名 *</label>
+                                    <input type="text" id="name" placeholder="您的姓名" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">邮箱 *</label>
+                                    <input type="email" id="email" placeholder="your@email.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">电话</label>
+                                    <input type="tel" id="phone" placeholder="您的联系电话">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company">公司/机构</label>
+                                    <input type="text" id="company" placeholder="您的公司或机构名称">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="interest">关注方向</label>
+                                <select id="interest">
+                                    <option value="">请选择您感兴趣的方向</option>
+                                    <option value="edu">教育机器人</option>
+                                    <option value="industry">工业机器人</option>
+                                    <option value="service">服务机器人</option>
+                                    <option value="custom">定制解决方案</option>
+                                    <option value="other">其他合作</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">留言内容 *</label>
+                                <textarea id="message" rows="4" placeholder="请描述您的需求或合作意向…" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">✉ 发送消息</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== 页脚 ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>产品中心</h4>
+                    <ul>
+                        <li><a href="#" data-page="products" data-anchor="product-edubot">教育机器人 · KeKe EduBot S1</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-armpro">工业机械臂 · KeKe Arm Pro X3</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-servemini">服务机器人 · KeKe Serve Mini</a></li>
+                        <li><a href="#" data-page="products" data-anchor="product-custom">定制解决方案</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#" data-page="about">公司介绍</a></li>
+                        <li><a href="#" data-page="team">核心团队</a></li>
+                        <li><a href="#" data-page="news">新闻动态</a></li>
+                        <li><a href="#" data-page="contact">加入我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>服务支持</h4>
+                    <ul>
+                        <li><a href="#" data-page="contact">联系我们</a></li>
+                        <li><a href="#" data-page="contact">技术支持</a></li>
+                        <li><a href="#" data-page="contact" data-anchor="product-edubot">下载中心</a></li>
+                        <li><a href="#">文档中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-link" aria-label="微信公众号">💬</a>
+                        <a href="#" class="social-link" aria-label="官方微博">📢</a>
+                        <a href="#" class="social-link" aria-label="B站频道">📺</a>
+                        <a href="#" class="social-link" aria-label="GitHub">💻</a>
+                    </div>
+                    <p class="footer-brand-tagline">探索智能未来<br>用科技让世界更美好</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <a href="#" class="footer-logo-mini" data-page="home">
+                        <span class="logo-icon">◈</span>
+                        <span>科科机器人</span>
+                    </a>
+                </div>
+                <div class="footer-bottom-right">
+                    <p>&copy; 2026 科科机器人科技团队. All Rights Reserved. 粤ICP备XXXXXXXX号</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="news/news-data.js"></script>
+    <script src="team/team-data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
