@@ -17,7 +17,7 @@ var teamData = [
         photo: 'team/jiang-yuhao/蒋宇皓.jpg',
         folder: 'team/jiang-yuhao'
     },
-    {
+    /*{
         id: 'li-sihan',
         name: '李思涵',
         title: '联合创始人 & CTO',
@@ -25,7 +25,7 @@ var teamData = [
         avatarGradient: 'grad-industry',
         shortBio: '浙江大学计算机硕士，前百度深度学习研究院资深研究员。主导多款AI产品技术架构设计，在CV与NLP领域有深厚积累。',
         folder: 'team/li-sihan'
-    },
+    },*/
     {
         id: 'pan-ye',
         name: '潘烨',
@@ -54,7 +54,7 @@ var teamData = [
         shortBio: '武汉科技大学机械工程学士。',
         folder: 'team/yao-xuan'
     },
-    {
+    /*{
         id: 'chen-yutong',
         name: '陈雨桐',
         title: '产品设计总监',
@@ -62,5 +62,5 @@ var teamData = [
         avatarGradient: 'grad-hero',
         shortBio: '上海交通大学工业设计硕士，前小米生态链高级产品经理。擅长将前沿技术转化为极致用户体验，作品荣获iF设计奖。',
         folder: 'team/chen-yutong'
-    }
+    }*/
 ];
