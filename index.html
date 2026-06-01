@@ -22,7 +22,7 @@
             <ul class="navbar-menu" id="navbarMenu">
                 <li><a href="#" class="nav-link active" data-page="home">首页</a></li>
                 <li class="nav-dropdown">
-                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="about">关于我们</a>
+                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="about" data-dropdown="true">关于我们</a>
                     <ul class="dropdown-menu">
                         <li><a href="#" data-page="about">公司介绍</a></li>
                         <li><a href="#" data-page="team">核心团队</a></li>
@@ -30,7 +30,7 @@
                     </ul>
                 </li>
                 <li class="nav-dropdown">
-                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="products">产品服务</a>
+                    <a href="#" class="nav-link nav-dropdown-trigger" data-page="products" data-dropdown="true">产品服务</a>
                     <ul class="dropdown-menu">
                         <li><a href="#" data-page="products" data-anchor="product-edubot">教育机器人</a></li>
                         <li><a href="#" data-page="products" data-anchor="product-armpro">工业机器人</a></li>
@@ -448,7 +448,7 @@
         <section class="page" id="page-team-detail">
             <div class="container" style="max-width:900px;">
                 <div class="team-detail-content" id="teamDetailContent">
-                    <!- - 由 JS 动态填充 - ->
+                    <!-- 由 JS 动态填充 -->
                 </div>
                 <div class="team-detail-back">
                     <button class="btn btn-outline-dark" data-page="team">← 返回团队列表</button>
@@ -469,7 +469,7 @@
             <div class="team-content">
                 <div class="container">
                     <div class="team-grid" id="teamGrid">
-                        <!- - 由 JS 根据 team/team-data.js 动态渲染 - ->
+                        <!-- 由 JS 根据 team/team-data.js 动态渲染 -->
                     </div>
 
                     <div class="join-us">

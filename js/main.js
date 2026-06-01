@@ -96,13 +96,74 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 绑定所有带 data-page 的导航元素
+    // 绑定所有带 data-page 的导航元素（下拉触发器除外）
     document.querySelectorAll('[data-page]').forEach(function (el) {
+        // 跳过下拉触发器，它们有独立的点击处理
+        if (el.hasAttribute('data-dropdown')) return;
+
         el.addEventListener('click', function (e) {
             e.preventDefault();
             const pageName = this.getAttribute('data-page');
             const anchorId = this.getAttribute('data-anchor');
             switchPage(pageName, anchorId);
+        });
+    });
+
+    // ==================== 下拉菜单点击切换（桌面端和触摸设备） ====================
+    var dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger[data-dropdown]');
+
+    dropdownTriggers.forEach(function (trigger) {
+        trigger.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // 移动端（≤640px）：下拉子项始终可见，触发器直接导航
+            if (window.innerWidth <= 640) {
+                var pageName = this.getAttribute('data-page');
+                var anchorId = this.getAttribute('data-anchor');
+                switchPage(pageName, anchorId);
+                return;
+            }
+
+            var parentLi = this.closest('.nav-dropdown');
+            var isOpen = parentLi.classList.contains('dropdown-open');
+
+            // 如果已打开，第二次点击导航到目标页面
+            if (isOpen) {
+                document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
+                    dd.classList.remove('dropdown-open');
+                });
+                var pageName = this.getAttribute('data-page');
+                var anchorId = this.getAttribute('data-anchor');
+                switchPage(pageName, anchorId);
+                return;
+            }
+
+            // 关闭所有其他下拉
+            document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
+                dd.classList.remove('dropdown-open');
+            });
+
+            // 打开当前下拉
+            parentLi.classList.add('dropdown-open');
+        });
+    });
+
+    // 点击页面其他区域关闭所有下拉菜单
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.nav-dropdown')) {
+            document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
+                dd.classList.remove('dropdown-open');
+            });
+        }
+    });
+
+    // 下拉子项点击后关闭下拉菜单
+    document.querySelectorAll('.dropdown-menu a[data-page]').forEach(function (link) {
+        link.addEventListener('click', function () {
+            document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
+                dd.classList.remove('dropdown-open');
+            });
         });
     });
 
