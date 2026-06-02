@@ -485,8 +485,11 @@
                             <input type="hidden" name="access_key" value="e81b0876-9895-4174-9f7e-cdc1ecc934a2">
                             <input type="hidden" name="from_name" value="科科机器人官网咨询">
                             <input type="hidden" name="subject" value="新的客户咨询">
-                            <!-- 防止垃圾邮件 -->
+                            <!-- 防止垃圾邮件（Honeypot ×2） -->
                             <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+                            <input type="text" name="website" style="position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
+                            <!-- 动态 Nonce 令牌（防重放） -->
+                            <input type="hidden" name="form_nonce" value="">
                             <h3>发送消息</h3>
                             <p class="form-subtitle">请填写以下表单，我们将在24小时内与您联系</p>
                             <div class="form-row">
@@ -524,6 +527,8 @@
                                 <label for="message">留言内容 *</label>
                                 <textarea id="message" name="message" rows="4" placeholder="请描述您的需求或合作意向…" required></textarea>
                             </div>
+                            <!-- Web3Forms Captcha 容器 -->
+                            <div data-captcha="true" style="margin-bottom:20px;"></div>
                             <button type="submit" class="btn btn-primary btn-full">✉ 发送消息</button>
                         </form>
                     </div>
@@ -591,6 +596,8 @@
 
     <script src="news/news-data.js"></script>
     <script src="team/team-data.js"></script>
+    <!-- Web3Forms Captcha — Cloudflare Turnstile，免费使用 -->
+    <script src="https://web3forms.com/client/static/captcha/js/script.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

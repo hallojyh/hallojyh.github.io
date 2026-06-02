@@ -653,18 +653,144 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ==================== 联系表单提交 ====================
+    // ==================== 联系表单提交（五层反滥用防护） ====================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
+
+        // ──【1】动态 Nonce 令牌系统（防重放攻击）──
+        var NONCE_KEY = 'coco_form_nonces';
+        var currentNonce = '';
+
+        function generateNonce() {
+            var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+            var n = '';
+            for (var i = 0; i < 48; i++) n += chars.charAt(Math.floor(Math.random() * chars.length));
+            return n + '_' + Date.now().toString(36);
+        }
+
+        function getUsedNonces() {
+            try {
+                var raw = localStorage.getItem(NONCE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) { return []; }
+        }
+
+        function markNonceUsed(nonce) {
+            var list = getUsedNonces();
+            list.push(nonce);
+            if (list.length > 50) list = list.slice(-50);
+            try { localStorage.setItem(NONCE_KEY, JSON.stringify(list)); } catch (e) {}
+        }
+
+        function isNonceUsed(nonce) {
+            return getUsedNonces().indexOf(nonce) !== -1;
+        }
+
+        function refreshNonce() {
+            currentNonce = generateNonce();
+            var nonceField = contactForm.querySelector('[name="form_nonce"]');
+            if (nonceField) nonceField.value = currentNonce;
+        }
+        refreshNonce();
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) refreshNonce();
+        });
+
+        // ──【2】提交速度检测（机器人通常 < 3s）──
+        var formLoadTime = Date.now();
+        var MIN_FORM_TIME = 3000;
+
+        // ──【3】localStorage 频率 + 日限额 ──
+        var RATE_LIMIT_KEY = 'coco_contact_rate';
+        var COOLDOWN_MINUTES = 5;
+        var DAILY_MAX = 3;
+
+        function getRateData() {
+            try {
+                var data = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY));
+                if (!data || data.date !== new Date().toDateString()) {
+                    return { date: new Date().toDateString(), count: 0, lastTime: 0 };
+                }
+                return data;
+            } catch (e) {
+                return { date: new Date().toDateString(), count: 0, lastTime: 0 };
+            }
+        }
+
+        function updateRateData(data) {
+            try { localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(data)); } catch (e) {}
+        }
+
+        // ──【4】提交处理器 ──
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // 简单反垃圾：检查隐藏 checkbox
+            // -------- 防护 A：双 Honeypot --------
             var botcheck = contactForm.querySelector('[name="botcheck"]');
-            if (botcheck && botcheck.checked) {
-                alert('提交失败，请重试。');
+            var website = contactForm.querySelector('[name="website"]');
+            if ((botcheck && botcheck.checked) || (website && website.value.trim() !== '')) {
+                return; // 静默拒绝
+            }
+
+            // -------- 防护 B：Nonce 防重放 --------
+            var nonceField = contactForm.querySelector('[name="form_nonce"]');
+            var submittedNonce = nonceField ? nonceField.value : '';
+            if (!submittedNonce || submittedNonce !== currentNonce) {
+                alert('页面已过期，请刷新后重试。');
+                refreshNonce();
                 return;
             }
+            if (isNonceUsed(submittedNonce)) {
+                alert('请勿重复提交，谢谢！');
+                return;
+            }
+
+            // -------- 防护 C：提交速度 --------
+            var elapsed = Date.now() - formLoadTime;
+            if (elapsed < MIN_FORM_TIME) {
+                alert('请稍等片刻再提交～');
+                return;
+            }
+            formLoadTime = Date.now();
+
+            // -------- 防护 D：频率 & 日限额 --------
+            var rate = getRateData();
+            var now = Date.now();
+            if (rate.lastTime > 0 && (now - rate.lastTime) < COOLDOWN_MINUTES * 60 * 1000) {
+                var remaining = Math.ceil((COOLDOWN_MINUTES * 60 * 1000 - (now - rate.lastTime)) / 1000);
+                alert('请 ' + remaining + ' 秒后再提交，感谢您的耐心！');
+                return;
+            }
+            if (rate.count >= DAILY_MAX) {
+                alert('您今天的发送次数已达上限（' + DAILY_MAX + ' 次），请明天再试，或直接发送邮件联系我们。');
+                return;
+            }
+
+            // -------- 防护 E：内容 & 邮箱校验 --------
+            var msgField = contactForm.querySelector('[name="message"]');
+            if (msgField && msgField.value.trim().length < 10) {
+                alert('请至少填写 10 个字的留言内容。');
+                return;
+            }
+            var emailField = contactForm.querySelector('[name="email"]');
+            if (emailField && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) {
+                alert('请填写正确的邮箱地址。');
+                return;
+            }
+
+            // -------- 防护 F：Captcha 验证（Turnstile）--------
+            var captchaField = contactForm.querySelector('[name="cf-turnstile-response"]') ||
+                               contactForm.querySelector('[name="h-captcha-response"]');
+            if (captchaField && !captchaField.value.trim()) {
+                alert('请完成人机验证后再提交。');
+                return;
+            }
+
+            // 先扣额度再发请求（防并发绕过）
+            rate.count++;
+            rate.lastTime = now;
+            updateRateData(rate);
+            markNonceUsed(submittedNonce);
 
             var btn = contactForm.querySelector('button[type="submit"]');
             var originalText = btn.textContent;
@@ -672,9 +798,8 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.textContent = '⏳ 发送中…';
             btn.disabled = true;
 
-            // 收集表单数据
+            // 收集 & 发送
             var formData = new FormData(contactForm);
-            // 拼接关注方向到留言
             var interest = formData.get('interest');
             var message = formData.get('message');
             if (interest) {
@@ -688,24 +813,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 formData.set('message', '[关注方向：' + (interestMap[interest] || interest) + ']\n' + message);
             }
 
-            // 发送到 Web3Forms
             fetch(contactForm.action, {
                 method: 'POST',
                 body: formData
             })
-            .then(function (response) {
-                return response.json();
-            })
+            .then(function (response) { return response.json(); })
             .then(function (data) {
                 if (data.success) {
                     btn.textContent = '✓ 发送成功！我们将在24小时内回复';
                     btn.style.background = '#10b981';
                     contactForm.reset();
+                    refreshNonce();
                 } else {
+                    rate.count--;
+                    updateRateData(rate);
                     throw new Error(data.message || '发送失败');
                 }
             })
             .catch(function (error) {
+                rate.count--;
+                updateRateData(rate);
                 btn.textContent = '✗ ' + (error.message || '网络错误，请稍后重试');
                 btn.style.background = '#ef4444';
             })
