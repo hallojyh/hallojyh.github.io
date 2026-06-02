@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.getElementById('menuToggle');
     const navbarMenu = document.getElementById('navbarMenu');
     const pageContainer = document.getElementById('pageContainer');
+    var _handlingPopState = false;
 
     // ==================== 页面切换系统 ====================
     function switchPage(pageName, anchorId) {
@@ -94,7 +95,63 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // 更新浏览器历史记录（popstate 回调时不重复 push）
+        if (!_handlingPopState) {
+            var state = { pageName: pageName, anchorId: anchorId || null };
+            history.pushState(state, '', '#' + pageName);
+        }
+        _handlingPopState = false;
     }
+
+    // ==================== 浏览器前进/后退支持 ====================
+    window.addEventListener('popstate', function (e) {
+        _handlingPopState = true;
+        if (e.state && e.state.pageName) {
+            switchPage(e.state.pageName, e.state.anchorId);
+            if (e.state.memberId) {
+                showTeamDetail(e.state.memberId);
+            } else if (e.state.newsIndex !== undefined) {
+                showNewsDetail(e.state.newsIndex);
+            }
+        } else {
+            // 无历史记录时回到首页
+            switchPage('home');
+        }
+    });
+
+    // 初始加载时根据 URL hash 路由到对应页面
+    (function initHashRoute() {
+        var hash = window.location.hash;
+        if (hash && hash.length > 1) {
+            var hashContent = hash.substring(1);
+            if (hashContent.indexOf('team-detail/') === 0) {
+                var memberId = hashContent.split('/')[1];
+                if (memberId) {
+                    _handlingPopState = true;
+                    switchPage('team-detail');
+                    showTeamDetail(memberId);
+                    var detailState = { pageName: 'team-detail', memberId: memberId };
+                    history.replaceState(detailState, '', '#' + hashContent);
+                }
+            } else if (hashContent.indexOf('news-detail/') === 0) {
+                var newsIndex = parseInt(hashContent.split('/')[1], 10);
+                if (!isNaN(newsIndex)) {
+                    _handlingPopState = true;
+                    switchPage('news-detail');
+                    showNewsDetail(newsIndex);
+                    var detailState = { pageName: 'news-detail', newsIndex: newsIndex };
+                    history.replaceState(detailState, '', '#' + hashContent);
+                }
+            } else {
+                _handlingPopState = true;
+                switchPage(hashContent);
+            }
+        } else {
+            // 无 hash，设置首页初始状态
+            history.replaceState({ pageName: 'home' }, '', '#home');
+        }
+    })();
 
     // 绑定所有带 data-page 的导航元素（下拉触发器除外）
     document.querySelectorAll('[data-page]').forEach(function (el) {
@@ -395,6 +452,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // 切换到详情页
         switchPage('team-detail');
 
+        // 更新 URL 为详情页专有链接
+        if (!_handlingPopState) {
+            var detailState = { pageName: 'team-detail', memberId: memberId };
+            history.replaceState(detailState, '', '#team-detail/' + memberId);
+        }
+        _handlingPopState = false;
+
         var container = document.getElementById('teamDetailContent');
         if (!container) return;
 
@@ -529,6 +593,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 切换到详情页
         switchPage('news-detail');
+
+        // 更新 URL 为详情页专有链接
+        if (!_handlingPopState) {
+            var detailState = { pageName: 'news-detail', newsIndex: index };
+            history.replaceState(detailState, '', '#news-detail/' + index);
+        }
+        _handlingPopState = false;
 
         var container = document.getElementById('newsDetailContent');
         if (!container) return;
