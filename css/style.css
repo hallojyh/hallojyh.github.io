@@ -318,9 +318,7 @@ img { max-width:100%; display:block; }
 .timeline { position:relative; max-width:800px; margin:0 auto; padding:20px 0; }
 .timeline::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:2px; background:var(--color-border); transform:translateX(-50%); }
 .timeline-item { display:flex; align-items:flex-start; gap:32px; margin-bottom:40px; position:relative; }
-.timeline-item:nth-child(odd) { flex-direction:row-reverse; }
-.timeline-item:nth-child(odd) .timeline-card { text-align:right; }
-.timeline-item:nth-child(even) .timeline-card { text-align:left; }
+.timeline-item .timeline-card { text-align:left; }
 .timeline-year { flex:0 0 70px; font-family:var(--font-en); font-size:1.4rem; font-weight:800;
     background: var(--grad-industry-text);
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;

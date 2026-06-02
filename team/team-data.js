@@ -14,18 +14,36 @@ var teamData = [
         avatarInitial: '蒋',
         avatarGradient: 'grad-hero',
         shortBio: '武汉科技大学自动化学士，怀揣"让机器人走进千行百业"的愿景创立科科机器人，专注于智能机器人技术的产业化落地与团队建设。',
-        photo: 'team/jiang-yuhao/蒋宇皓.jpg',
         folder: 'team/jiang-yuhao'
     },
-    /*{
-        id: 'li-sihan',
-        name: '李思涵',
-        title: '联合创始人 & CTO',
+    {
+        id: 'du-yunfan',
+        name: '杜云帆',
+        title: '联合创始人',
+        avatarInitial: '杜',
+        avatarGradient: 'grad-hero',
+        shortBio: '武汉科技大学机器人专业学士，主攻强化学习与机器人智能决策方向。致力于将 DQN、PPO 等前沿算法与机器人硬件深度融合，推动机器人从"编程执行"迈向"自主学习"。',
+        folder: 'team/du-yunfan'
+    },
+    {
+        id: 'li-chengguo',
+        name: '李程果 & CTO',
+        title: '联合创始人',
         avatarInitial: '李',
-        avatarGradient: 'grad-industry',
-        shortBio: '浙江大学计算机硕士，前百度深度学习研究院资深研究员。主导多款AI产品技术架构设计，在CV与NLP领域有深厚积累。',
-        folder: 'team/li-sihan'
-    },*/
+        avatarGradient: 'grad-hero',
+        shortBio: '武汉科技大学机械专业学士，具备从机械结构设计、机电一体化到嵌入式开发的机器人全栈能力。擅长将机械本体、控制系统与嵌入式软硬件打通，打造完整可靠的机器人系统。',
+        folder: 'team/li-chengguo'
+    },
+    {
+        id: 'wang-le',
+        name: '王乐',
+        title: '联合创始人',
+        avatarInitial: '王',
+        avatarGradient: 'grad-service',
+        shortBio: '武汉科技大学机械工程学士。',
+        photo: 'team/wang-le/wangle.jpg',
+        folder: 'team/wang-le'
+    },
     {
         id: 'pan-ye',
         name: '潘烨',
@@ -36,14 +54,13 @@ var teamData = [
         folder: 'team/pan-ye'
     },
     {
-        id: 'wang-le',
-        name: '王乐',
-        title: '叼毛',
-        avatarInitial: '王',
+        id: 'shan-mingyu',
+        name: '单鸣宇',
+        title: '电子设计总监',
+        avatarInitial: '单',
         avatarGradient: 'grad-service',
-        shortBio: '武汉科技大学机械工程学士。',
-        photo: 'team/wang-le/wangle.jpg',
-        folder: 'team/wang-le'
+        shortBio: '武汉科技大学电子信息硕士。',
+        folder: 'team/shan-mingyu'
     },
     {
         id: 'yao-xuan',
@@ -54,13 +71,13 @@ var teamData = [
         shortBio: '武汉科技大学机械工程学士。',
         folder: 'team/yao-xuan'
     },
-    /*{
-        id: 'chen-yutong',
-        name: '陈雨桐',
-        title: '产品设计总监',
-        avatarInitial: '陈',
-        avatarGradient: 'grad-hero',
-        shortBio: '上海交通大学工业设计硕士，前小米生态链高级产品经理。擅长将前沿技术转化为极致用户体验，作品荣获iF设计奖。',
-        folder: 'team/chen-yutong'
-    }*/
+    {
+        id: 'wu-yuanhui',
+        name: '吴元辉',
+        title: '机电设计工程师',
+        avatarInitial: '吴',
+        avatarGradient: 'grad-service',
+        shortBio: '武汉科技大学机器人专业学士。',
+        folder: 'team/wu-yuanhui'
+    }
 ];
