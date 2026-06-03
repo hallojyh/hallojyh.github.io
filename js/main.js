@@ -9,8 +9,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.getElementById('navbar');
     const menuToggle = document.getElementById('menuToggle');
     const navbarMenu = document.getElementById('navbarMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
     const pageContainer = document.getElementById('pageContainer');
     var _handlingPopState = false;
+    var currentSlide = 0;
+    var autoPlayTimer = null;
+    var carouselTrack = null;
+    var carouselDots = [];
+    var totalSlides = 0;
+
+    // ==================== 移动端菜单辅助函数 ====================
+    function openMobileMenu() {
+        menuToggle.classList.add('active');
+        navbarMenu.classList.add('active');
+        if (menuOverlay) menuOverlay.classList.add('active');
+        document.body.classList.add('menu-open');
+    }
+
+    function closeMobileMenu() {
+        menuToggle.classList.remove('active');
+        navbarMenu.classList.remove('active');
+        if (menuOverlay) menuOverlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        // 收起所有展开的子菜单
+        document.querySelectorAll('.nav-dropdown.submenu-open').forEach(function (dd) {
+            dd.classList.remove('submenu-open');
+        });
+    }
 
     // ==================== 页面切换系统 ====================
     function switchPage(pageName, anchorId) {
@@ -54,9 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
-        // 关闭移动端菜单
-        menuToggle.classList.remove('active');
-        navbarMenu.classList.remove('active');
+        // 关闭移动端菜单（含遮罩、滚动解锁、子菜单收起）
+        closeMobileMenu();
 
         // 非首页强制显示实色导航栏（首页依赖滚动控制透明/实色切换）
         if (pageName === 'home') {
@@ -68,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 如果切换到首页，重置轮播
         if (pageName === 'home') {
             currentSlide = 0;
-            updateCarousel();
+            if (carouselTrack) updateCarousel();
             resetAutoPlay();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (anchorId) {
@@ -166,42 +190,55 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ==================== 下拉菜单点击切换（桌面端和触摸设备） ====================
+    // ==================== 下拉菜单点击切换 ====================
     var dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger[data-dropdown]');
+
+    // 判断是否为移动端布局（汉堡菜单可见）
+    function isMobileLayout() {
+        return getComputedStyle(menuToggle).display !== 'none';
+    }
 
     dropdownTriggers.forEach(function (trigger) {
         trigger.addEventListener('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
-            // 移动端（≤640px）：下拉子项始终可见，触发器直接导航
-            if (window.innerWidth <= 640) {
-                var pageName = this.getAttribute('data-page');
-                var anchorId = this.getAttribute('data-anchor');
-                switchPage(pageName, anchorId);
+            var parentLi = this.closest('.nav-dropdown');
+            var pageName = this.getAttribute('data-page');
+            var anchorId = this.getAttribute('data-anchor');
+
+            // ★ 移动端：手风琴展开/收起子菜单，不跳转
+            if (isMobileLayout()) {
+                // 汉堡菜单未打开时不响应
+                if (!navbarMenu.classList.contains('active')) return;
+
+                // 切换当前子菜单
+                var isOpen = parentLi.classList.contains('submenu-open');
+                // 先收起所有其他子菜单
+                document.querySelectorAll('.nav-dropdown.submenu-open').forEach(function (dd) {
+                    dd.classList.remove('submenu-open');
+                });
+                // 切换当前
+                if (!isOpen) {
+                    parentLi.classList.add('submenu-open');
+                }
                 return;
             }
 
-            var parentLi = this.closest('.nav-dropdown');
+            // ★ 桌面端：首次点击展开下拉，再次点击跳转
             var isOpen = parentLi.classList.contains('dropdown-open');
 
-            // 如果已打开，第二次点击导航到目标页面
             if (isOpen) {
                 document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
                     dd.classList.remove('dropdown-open');
                 });
-                var pageName = this.getAttribute('data-page');
-                var anchorId = this.getAttribute('data-anchor');
                 switchPage(pageName, anchorId);
                 return;
             }
 
-            // 关闭所有其他下拉
             document.querySelectorAll('.nav-dropdown.dropdown-open').forEach(function (dd) {
                 dd.classList.remove('dropdown-open');
             });
-
-            // 打开当前下拉
             parentLi.classList.add('dropdown-open');
         });
     });
@@ -240,18 +277,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ==================== 移动端菜单 ====================
     menuToggle.addEventListener('click', function () {
-        this.classList.toggle('active');
-        navbarMenu.classList.toggle('active');
+        var isOpen = navbarMenu.classList.contains('active');
+        if (isOpen) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+
+    // 点击遮罩层关闭菜单
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', function () {
+            closeMobileMenu();
+        });
+    }
+
+    // 窗口大小切换时清理移动端菜单状态（防止 resize 导致的残留）
+    var lastWindowWidth = window.innerWidth;
+    window.addEventListener('resize', function () {
+        var currentWidth = window.innerWidth;
+        // 跨越 640px 断点时，关闭移动端菜单
+        if ((lastWindowWidth <= 640 && currentWidth > 640) ||
+            (lastWindowWidth > 640 && currentWidth <= 640)) {
+            closeMobileMenu();
+        }
+        lastWindowWidth = currentWidth;
     });
 
     // ==================== 轮播图 ====================
-    const carouselTrack = document.getElementById('carouselTrack');
-    const carouselDots = document.querySelectorAll('.carousel-dot');
+    carouselTrack = document.getElementById('carouselTrack');
+    carouselDots = document.querySelectorAll('.carousel-dot');
     const prevBtn = document.getElementById('carouselPrev');
     const nextBtn = document.getElementById('carouselNext');
-    const totalSlides = carouselDots.length;
-    let currentSlide = 0;
-    let autoPlayTimer = null;
+    totalSlides = carouselDots.length;
+    // currentSlide and autoPlayTimer declared at top of script
 
     function updateCarousel() {
         // 移动轨道
